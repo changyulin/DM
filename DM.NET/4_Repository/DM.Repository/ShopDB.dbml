@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Shop" Class="ShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Shop;User ID=sa" SettingsObjectName="DM.Repository.Properties.Settings" SettingsPropertyName="ShopConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Brands" Member="Brands">
+    <Type Name="Brands">
+      <Column Name="BrandID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BrandName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Brands_Product" Member="Product" ThisKey="BrandID" OtherKey="BrandID" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Category" Member="Category">
+    <Type Name="Category">
+      <Column Name="CategoryID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Category_Product" Member="Product" ThisKey="CategoryID" OtherKey="CategoryID" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Product">
+    <Type Name="Product">
+      <Column Name="ProductID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BrandID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ProductName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductSize" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ProductPrice" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductColor" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Brands_Product" Member="Brands" ThisKey="BrandID" OtherKey="BrandID" Type="Brands" IsForeignKey="true" />
+      <Association Name="Category_Product" Member="Category" ThisKey="CategoryID" OtherKey="CategoryID" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
