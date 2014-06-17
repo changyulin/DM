@@ -7,6 +7,7 @@ using System.Web.SessionState;
 using StackExchange.Profiling;
 using DM.Infrastructure.Log;
 using DM.Infrastructure.Util.StructureMapHelpers;
+using DM.Infrastructure.Route;
 using System.IO;
 
 namespace DM.WebUI
@@ -26,6 +27,9 @@ namespace DM.WebUI
             // initialize structure map
             string structureMapPath = Path.Combine(configDir, "StructureMap.config");
             StructureMapHelper.Initialize(structureMapPath);
+
+            //load the configuration for Route
+            RoutesConfig.Configure("RouteRule");
 
             // this is only done for testing purposes so we don't check in the db to source control
             // ((SampleWeb.Helpers.SqliteMiniProfilerStorage)MiniProfiler.Settings.Storage).RecreateDatabase();
