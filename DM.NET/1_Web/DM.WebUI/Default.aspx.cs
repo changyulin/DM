@@ -10,6 +10,8 @@ using DM.ViewModel;
 using StackExchange.Profiling;
 using DM.Infrastructure.Log;
 using StructureMap;
+using DM.Infrastructure.Cache;
+using System.Xml.Linq;
 
 namespace DM.WebUI
 {
@@ -24,8 +26,9 @@ namespace DM.WebUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            XElement configTest = ConfigListItem.Get("ConfigTest").Value;
             using (MiniProfiler.Current.Step("Page_Load()"))
-            { 
+            {
                 ProductViewModel product = productService.GetProduct("1");
                 LogHelper.Debug("log Debug!");
             }

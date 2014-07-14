@@ -84,6 +84,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="App_Data\Config\ConfigList\ConfigTest.xml" />
     <Content Include="Error.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
@@ -168,9 +169,7 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
@@ -187,6 +186,10 @@
     <ProjectReference Include="..\..\2_Service\ViewModel\DM.ViewModel.csproj">
       <Project>{55DC997E-AD55-4E1F-8C13-11434003AE0A}</Project>
       <Name>DM.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Cache\DM.Infrastructure.Cache.csproj">
+      <Project>{5dd5835b-7040-4e3e-985f-525bd2f0f330}</Project>
+      <Name>DM.Infrastructure.Cache</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Log\DM.Infrastructure.Log.csproj">
       <Project>{B6D58AA5-AD48-44DA-944F-38A34A55DBDB}</Project>
@@ -230,6 +233,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\RouteRule.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\cachingConfiguration.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
