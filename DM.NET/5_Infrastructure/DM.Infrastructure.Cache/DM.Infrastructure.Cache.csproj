@@ -61,7 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs" />
+    <Compile Include="CacheFactory.cs" />
+    <Compile Include="CacheBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConfigListItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LangCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
