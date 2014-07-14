@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Xml.Linq;
+using DM.Infrastructure.Cache;
+using DM.Infrastructure.Log;
+using DM.Infrastructure.Util.LangHelpers;
 using DM.IService;
-using DM.Service;
 using DM.ViewModel;
 using StackExchange.Profiling;
-using DM.Infrastructure.Log;
 using StructureMap;
 
 namespace DM.WebUI
@@ -24,8 +22,10 @@ namespace DM.WebUI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            XElement configTest = ConfigListItem.Get("ConfigTest").Value;
+            string home = LangHelpers.GetString("homeLabel", "UI");
             using (MiniProfiler.Current.Step("Page_Load()"))
-            { 
+            {
                 ProductViewModel product = productService.GetProduct("1");
                 LogHelper.Debug("log Debug!");
             }
