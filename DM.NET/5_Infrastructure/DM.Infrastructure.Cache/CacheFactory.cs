@@ -52,4 +52,12 @@ namespace DM.Infrastructure.Cache
     {
         public override string CacheName { get { return "Lang"; } }
     }
+
+    public class ScriptCacheFactory
+    {
+        public static CacheManager GetCacheManager()
+        {
+            return CacheFactory.GetCacheManager("Script") as CacheManager;
+        }
+    }
 }
