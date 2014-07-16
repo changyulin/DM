@@ -20,7 +20,7 @@ namespace DM.Infrastructure.Util.LangHelpers
             string[] langCultTemp = langCult.Split('-');
             string language = langCultTemp.Length > 0 ? langCultTemp[0] : string.Empty;
             string area = langCultTemp.Length > 1 ? langCultTemp[1] : string.Empty;
-            XElement langXml = LangCache.Get(language, area, category).Value;
+            XElement langXml = LangItem.Get(language, area, category).Value;
             XElement result = langXml.XPathSelectElement("String[@id='" + stringID + "']");
             if (result != null)
             {

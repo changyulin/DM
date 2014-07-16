@@ -87,7 +87,9 @@
     <Content Include="App_Data\Config\ConfigList\ConfigTest.xml" />
     <Content Include="App_Data\Config\Lang\en\US\UI.xml" />
     <Content Include="App_Data\Config\Lang\zh\CN\UI.xml" />
+    <Content Include="App_Data\Config\Script\Script.xml" />
     <Content Include="Error.aspx" />
+    <Content Include="Scripts\jsTest.js" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -204,6 +206,10 @@
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.LangHelpers\DM.Infrastructure.Util.LangHelpers.csproj">
       <Project>{0d5d06ee-ff65-4c8b-9949-44a853597c0f}</Project>
       <Name>DM.Infrastructure.Util.LangHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.ScriptHelpers\DM.Infrastructure.Util.ScriptHelpers.csproj">
+      <Project>{65a0760c-db40-44dc-a027-cf5ae540cd53}</Project>
+      <Name>DM.Infrastructure.Util.ScriptHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.StructureMapHelpers\DM.Infrastructure.Util.StructureMapHelpers.csproj">
       <Project>{F0D20F0A-2327-4A21-927D-F9B85497723D}</Project>

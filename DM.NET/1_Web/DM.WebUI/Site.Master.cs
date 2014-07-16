@@ -15,5 +15,10 @@ namespace DM.WebUI
             LiteralControl miniProfilerScript = new LiteralControl(MiniProfiler.RenderIncludesAsString());
             miniProfiler.Controls.Add(miniProfilerScript);
         }
+
+        protected void Page_PreRender(object sender, EventArgs o)
+        {
+
+        }
     }
 }
