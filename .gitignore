@@ -45,8 +45,6 @@ build/
 *.pidb
 *.log
 *.scc
-*.dll
-*.pdf
 
 # Visual C++ cache files
 ipch/
@@ -99,7 +97,7 @@ publish/
 
 # NuGet Packages Directory
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
-packages/
+#packages/
 
 # Windows Azure Build Output
 csx
@@ -156,4 +154,6 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-
+*.exe
+*.pdf
+*.ttf
