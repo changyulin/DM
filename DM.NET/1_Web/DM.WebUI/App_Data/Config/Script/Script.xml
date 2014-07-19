@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Scripts>
-  <!--<Script>http://code.jquery.com/jquery-1.10.2.min.js</Script>-->
+  <Script>http://code.jquery.com/jquery-1.10.2.min.js</Script>
   <Script>~/Scripts/jsTest.js</Script>
   <!--<Script Browser="IE"></Script>
   <Script Device="Mobile"></Script>-->

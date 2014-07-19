@@ -10,7 +10,7 @@
 namespace DM.WebUI {
     
     
-    public partial class SiteMaster {
+    public partial class BaseMaster {
         
         /// <summary>
         /// HeadContent 控件。
@@ -29,15 +29,6 @@ namespace DM.WebUI {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder miniProfiler;
-        
-        /// <summary>
-        /// ScriptMgr 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::DM.Infrastructure.Util.PageUtil.AltScriptManager ScriptMgr;
         
         /// <summary>
         /// MainContent 控件。

@@ -13,6 +13,11 @@ namespace DM.Infrastructure.Cache
     {
         protected override string ConfigSubFolder { get { return "Script"; } }
 
+        /// <summary>
+        /// Get js src list from cache
+        /// </summary>
+        /// <param name="refID">file name</param>
+        /// <returns>js src list</returns>
         public static IEnumerable<XElement> GetJSList(string refID)
         {
             XElement scriptItem = ScriptItem.Get(refID).Value;

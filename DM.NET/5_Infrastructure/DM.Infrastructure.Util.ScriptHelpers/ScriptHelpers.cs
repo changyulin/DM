@@ -17,93 +17,88 @@ using DM.Infrastructure.Util.HttpHelpers;
 using DM.Infrastructure.Util.XmlHelpers;
 using System.Configuration;
 using System.Xml.Linq;
+using System.Web.UI.HtmlControls;
 
 namespace DM.Infrastructure.Util.ScriptHelpers
 {
     public class ScriptHelpers
     {
         /// <summary>
-        /// load script
+        /// Add scriptFileName's script url to Page.Items
+        /// </summary>
+        /// <param name="page">page</param>
+        /// <param name="scriptItem">file name under App_Data/Script</param>
+        public static void AddScript(Page page, string scriptFileName)
+        {
+            IEnumerable<XElement> scriptList = ScriptItem.GetJSList(scriptFileName);
+            if (scriptList != null)
+            {
+                foreach (XElement x in scriptList)
+                {
+                    Add(page, x.Value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// load the Page.Items's script
         /// </summary>
         /// <param name="page"></param>
-        /// <param name="scriptItem">file name under App_Data/Script</param>
-        public static void LoadScript(Page page, string scriptItem)
+        public static void LoadScript(Page page)
         {
-            IEnumerable<XElement> scriptList = ScriptItem.GetJSList(scriptItem);
-            if (scriptList == null || scriptList.Count() == 0)
+            List<string> scriptList = page.Items["ScriptList"] as List<string>;
+            if (scriptList != null)
             {
-                return;
-            }
-
-            foreach (XElement x in scriptList)
-            {
-                string value = x.Value;
-                if (XmlHelpers.XmlHelpers.GetAttribute(x, "NoOptimize") == "1")
+                bool optimizeJS = ConfigurationManager.AppSettings["OptimizeJS"] == "1";
+                if (optimizeJS)
                 {
-                    Load(page, value, false);
+                    // cache the scripts if not cached already
+                    ScriptHelpers.CacheScripts(page, scriptList);
+                    string url = string.Format("{0}?hash={1}",
+                        page.ResolveClientUrl("~/scriptoptimizer.ashx"),
+                        HttpUtility.UrlEncode(ScriptHelpers.GetHash(scriptList)));
+                    page.ClientScript.RegisterClientScriptInclude("baseall", url);
                 }
                 else
                 {
-                    Load(page, value);
+                    foreach (string scriptUrl in scriptList)
+                    {
+                        HtmlGenericControl scriptHtml = new HtmlGenericControl("script");
+                        scriptHtml.Attributes.Add("type", "text/javascript");
+                        scriptHtml.Attributes.Add("src", scriptUrl);
+                        page.Header.Controls.Add(scriptHtml);
+                    }
                 }
             }
         }
 
-        public static void Load(Page page, string script)
+        /// <summary>
+        /// Get Cache Key
+        /// </summary>
+        /// <param name="setName">hash value</param>
+        /// <returns></returns>
+        public static string GetCacheKey(string setName)
         {
-            Load(page, script, NeedOptimize(page));
+            return "ScriptOptimizer." + setName;
         }
 
-        private static void Load(Page page, string script, bool optimize)
+        private static void Add(Page page, string script)
         {
-            if (!optimize)
+            // get/create a string list in the page items collection that has the script path
+            string scriptPath = page.ResolveUrl(script);
+
+            List<string> list = page.Items["ScriptList"] as List<string>;
+            if (list == null)
             {
-                if (ScriptManager.GetCurrent(page) != null)
-                {
-                    // ensure no duplicate scripts are added to the composite script
-                    ScriptReferenceCollection scripts = ScriptManager.GetCurrent(page).Scripts;
-                    scripts.Add(new ScriptReference(script));
-                }
-                else
-                    throw new ApplicationException("No script manager registered!");
+                list = new List<string>();
+                page.Items["ScriptList"] = list;
             }
-            else
-            {
-                // get/create a string list in the page items collection that has the script path
-                string scriptPath = page.ResolveUrl(script);
 
-                List<string> list = page.Items["ScriptList"] as List<string>;
-                if (list == null)
-                {
-                    list = new List<string>();
-                    page.Items["ScriptList"] = list;
-                }
-
-                if (!list.Contains(scriptPath))
-                    list.Add(scriptPath);
-            }
+            if (!list.Contains(scriptPath))
+                list.Add(scriptPath);
         }
 
-        private static bool NeedOptimize(Page page)
-        {
-            // find master page class to make sure we're using the base.master
-            //bool baseMaster = false;
-            //MasterPage master = page.Master;
-            //while (master != null && master.Master != null)
-            //{
-            //    master = master.Master;
-            //}
-            //if (master != null && master.ToString().IndexOf("base_master", StringComparison.OrdinalIgnoreCase) > -1)
-            //{
-            //    baseMaster = true;
-            //}
-            bool baseMaster = true;
-
-            bool optimize = ConfigurationManager.AppSettings["OptimizeJS"] == "1" && baseMaster;
-            return optimize;
-        }
-
-        public static void CacheScripts(Page page, List<string> scriptList)
+        private static void CacheScripts(Page page, List<string> scriptList)
         {
             ICacheManager cache = ScriptCacheFactory.GetCacheManager();
             string keyName = GetCacheKey(GetHash(scriptList));
@@ -151,7 +146,7 @@ namespace DM.Infrastructure.Util.ScriptHelpers
         }
 
         // combine file names and creation times to get a hash value
-        public static string GetHash(List<string> scriptList)
+        private static string GetHash(List<string> scriptList)
         {
             StringBuilder allNames = new StringBuilder();
             foreach (string script in scriptList)
@@ -179,11 +174,6 @@ namespace DM.Infrastructure.Util.ScriptHelpers
             }
 
             return GetHash(allNames.ToString());
-        }
-
-        public static string GetCacheKey(string setName)
-        {
-            return "ScriptOptimizer." + setName;
         }
 
         private static string GetHash(string input)

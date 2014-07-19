@@ -1,0 +1,21 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Base.Master.cs" Inherits="DM.WebUI.BaseMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+    <asp:PlaceHolder ID="miniProfiler" runat="server" />
+</head>
+<body>
+    <form runat="server">
+    <div class="header"></div>
+    <div class="main">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+    </div>
+    <div class="footer"></div>
+    </form>
+</body>
+</html>

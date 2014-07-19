@@ -1,4 +1,4 @@
-﻿<%@ Page Title="主页" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="主页" Language="C#" MasterPageFile="~/Base.master" AutoEventWireup="true"
     CodeBehind="Default.aspx.cs" Inherits="DM.WebUI._Default" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">

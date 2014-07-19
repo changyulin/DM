@@ -83,11 +83,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About.aspx" />
-    <Content Include="Account\ChangePassword.aspx" />
-    <Content Include="Account\ChangePasswordSuccess.aspx" />
-    <Content Include="Account\Login.aspx" />
-    <Content Include="Account\Register.aspx" />
     <Content Include="App_Data\Config\ConfigList\ConfigTest.xml" />
     <Content Include="App_Data\Config\Feature\Features.xml" />
     <Content Include="App_Data\Config\Feature\InternalURL.xml" />
@@ -113,40 +108,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\ChangePassword.aspx.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ChangePassword.aspx.designer.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
-      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
-      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Account\Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -174,20 +137,19 @@
     <Compile Include="HttpModule\MyModule.cs" />
     <Compile Include="HttpModule\RoutesModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
+    <Compile Include="Base.Master.cs">
+      <DependentUpon>Base.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
+    <Compile Include="Base.Master.designer.cs">
+      <DependentUpon>Base.Master</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="HttpHander\HttpHanderCommon\ScriptOptimizer.ashx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\Web.config" />
-    <Content Include="Site.Master" />
+    <Content Include="Base.Master" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\2_Service\DM.IService\DM.IService.csproj">
@@ -221,10 +183,6 @@
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.LangHelpers\DM.Infrastructure.Util.LangHelpers.csproj">
       <Project>{0d5d06ee-ff65-4c8b-9949-44a853597c0f}</Project>
       <Name>DM.Infrastructure.Util.LangHelpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.PageUtil\DM.Infrastructure.Util.PageUtil.csproj">
-      <Project>{1cfab398-fcb2-410b-b9a2-3f3d11629286}</Project>
-      <Name>DM.Infrastructure.Util.PageUtil</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.ScriptHelpers\DM.Infrastructure.Util.ScriptHelpers.csproj">
       <Project>{65a0760c-db40-44dc-a027-cf5ae540cd53}</Project>
