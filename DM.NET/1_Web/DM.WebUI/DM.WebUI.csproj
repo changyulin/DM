@@ -50,6 +50,10 @@
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\Microsoft.Practices\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MiniProfiler35">
       <HintPath>..\..\packages\MiniProfiler35.2.0.3.13\lib\net35\MiniProfiler35.dll</HintPath>
@@ -85,6 +89,8 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="App_Data\Config\ConfigList\ConfigTest.xml" />
+    <Content Include="App_Data\Config\Feature\Features.xml" />
+    <Content Include="App_Data\Config\Feature\InternalURL.xml" />
     <Content Include="App_Data\Config\Lang\en\US\UI.xml" />
     <Content Include="App_Data\Config\Lang\zh\CN\UI.xml" />
     <Content Include="App_Data\Config\Script\Script.xml" />
@@ -159,6 +165,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpHander\HttpHanderCommon\ScriptOptimizer.ashx.cs">
+      <DependentUpon>ScriptOptimizer.ashx</DependentUpon>
+    </Compile>
     <Compile Include="HttpHander\MyHandler.ashx.cs">
       <DependentUpon>MyHandler.ashx</DependentUpon>
     </Compile>
@@ -173,7 +182,9 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="HttpHander\HttpHanderCommon\ScriptOptimizer.ashx" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
@@ -203,9 +214,17 @@
       <Project>{9244c7b0-fe29-4595-8fc4-adc99cbc98c5}</Project>
       <Name>DM.Infrastructure.Route</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.FeatureHelpers\DM.Infrastructure.Util.FeatureHelpers.csproj">
+      <Project>{cd84eb2f-e749-4a29-b772-30315cd8dd50}</Project>
+      <Name>DM.Infrastructure.Util.FeatureHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.LangHelpers\DM.Infrastructure.Util.LangHelpers.csproj">
       <Project>{0d5d06ee-ff65-4c8b-9949-44a853597c0f}</Project>
       <Name>DM.Infrastructure.Util.LangHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.PageUtil\DM.Infrastructure.Util.PageUtil.csproj">
+      <Project>{1cfab398-fcb2-410b-b9a2-3f3d11629286}</Project>
+      <Name>DM.Infrastructure.Util.PageUtil</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.ScriptHelpers\DM.Infrastructure.Util.ScriptHelpers.csproj">
       <Project>{65a0760c-db40-44dc-a027-cf5ae540cd53}</Project>

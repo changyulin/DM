@@ -71,6 +71,7 @@
     <Compile Include="ConfigListItem.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FeatureItem.cs" />
     <Compile Include="LangItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptItem.cs" />

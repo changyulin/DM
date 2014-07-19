@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Features>
+  <Feature ID="jQueryURL">http://code.jquery.com/jquery-1.10.2.min.js</Feature>
+  <Feature ID="jQueryURL" Environment="local">http://code.jquery.com/jquery-1.10.2.js</Feature>
+
+  <!--
+  <Feature ID="DefaultTimeout">60000</Feature>
+  
+  <Feature ID="LoginServer" Environment="localiis">https://awse2dev81.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="local">https://awse2dev81.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="localsz">https://awse2dev81.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="dev">https://awse2dev81.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="szqa01">https://awse2dev81.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="szqa02">https://awse2dev81.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="qa">https://advqa.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="uat">https://awsstgmain.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="staging">https://awsstgmain.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="prod">https://advtools.morningstar.com</Feature>
+  <Feature ID="LoginServer" Environment="prodprimary">https://advtools.morningstar.com</Feature>
+  -->
+</Features>

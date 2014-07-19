@@ -9,6 +9,7 @@ using DM.Infrastructure.Log;
 using DM.Infrastructure.Util.StructureMapHelpers;
 using DM.Infrastructure.Route;
 using System.IO;
+using System.Configuration;
 
 namespace DM.WebUI
 {
@@ -44,7 +45,7 @@ namespace DM.WebUI
             // the user, or similar; this could also all be done in action filters, but this
             // is simple and practical; just return null for most users. For our test, we'll
             // profile only for local requests (seems reasonable)
-            if (Request.IsLocal)
+            if (Request.IsLocal && ConfigurationManager.AppSettings["EnableMiniProfiler"] == "1")
             {
                 profiler = MiniProfiler.Start();
             }
@@ -72,7 +73,7 @@ namespace DM.WebUI
             Exception ex = Server.GetLastError();
             LogHelper.Error("Global Error", ex.InnerException != null ? ex.InnerException : ex);
             Context.ClearError();
-            Response.Redirect("~/Error.aspx");
+            //Response.Redirect("~/Error.aspx");
         }
 
         void Session_Start(object sender, EventArgs e)
