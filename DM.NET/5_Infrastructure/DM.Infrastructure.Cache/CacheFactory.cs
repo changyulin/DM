@@ -60,4 +60,12 @@ namespace DM.Infrastructure.Cache
             return CacheFactory.GetCacheManager("Script") as CacheManager;
         }
     }
+
+    public class StyleCacheFactory
+    {
+        public static CacheManager GetCacheManager()
+        {
+            return CacheFactory.GetCacheManager("Style") as CacheManager;
+        }
+    }
 }

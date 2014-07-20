@@ -10,9 +10,9 @@ using Microsoft.Practices.EnterpriseLibrary.Caching;
 namespace DM.WebUI.HttpHander.HttpHanderCommon
 {
     /// <summary>
-    /// ScriptOptimizer 的摘要说明
+    /// StyleOptimizer 的摘要说明
     /// </summary>
-    public class ScriptOptimizer : IHttpHandler
+    public class StyleOptimizer : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -22,7 +22,7 @@ namespace DM.WebUI.HttpHander.HttpHanderCommon
             string hash = request["hash"];
             if (!string.IsNullOrEmpty(hash))
             {
-                ICacheManager cache = ScriptCacheFactory.GetCacheManager();
+                ICacheManager cache = StyleCacheFactory.GetCacheManager();
                 string keyName = PageHelpers.GetCacheKey(hash);
                 byte[] responseBytes = cache[keyName] as byte[];
                 if (responseBytes != null)
@@ -30,7 +30,7 @@ namespace DM.WebUI.HttpHander.HttpHanderCommon
                     HttpResponse response = context.Response;
 
                     response.AppendHeader("Content-Length", responseBytes.Length.ToString(CultureInfo.InvariantCulture));
-                    response.ContentType = "text/javascript";
+                    response.ContentType = "text/css";
                     response.Cache.SetCacheability(HttpCacheability.Public);
                     response.Cache.SetExpires(DateTime.Now.Add(TimeSpan.FromDays(30)));
                     response.Cache.SetMaxAge(TimeSpan.FromDays(30));

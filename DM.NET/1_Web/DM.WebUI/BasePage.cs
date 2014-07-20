@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.UI;
-using DM.Infrastructure.Util.ScriptHelpers;
+using DM.Infrastructure.Util.PageUtil;
 
 namespace DM.WebUI
 {
@@ -11,23 +11,14 @@ namespace DM.WebUI
             
         }
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            PageLoad();
-        }
-
-        protected virtual void PageLoad()
-        {
-            //add style
-        }
-
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
             PageLoadComplete();
-        }
+        } 
 
         protected virtual void PageLoadComplete()
         {
+            StyleHelpers.AddStyle(this.Page, "Style");
             ScriptHelpers.AddScript(this.Page, "Script");
 
             ExcutePrePageLoadCompleteJs();

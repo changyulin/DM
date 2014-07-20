@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using DM.Infrastructure.Util.FeatureHelpers;
-using DM.Infrastructure.Util.ScriptHelpers;
+using DM.Infrastructure.Util.PageUtil;
 using StackExchange.Profiling;
 
 namespace DM.WebUI
@@ -22,6 +22,7 @@ namespace DM.WebUI
 
         protected void Page_PreRender(object sender, EventArgs o)
         {
+            StyleHelpers.LoadStyle(this.Page);
             ScriptHelpers.LoadScript(this.Page);
         }
     }

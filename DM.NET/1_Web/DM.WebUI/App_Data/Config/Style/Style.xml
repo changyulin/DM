@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Styles>
+  <Style>~/Styles/Site.css</Style>
+  <Style Browser="IE" MajorVersion="8">~/Styles/IE8.css</Style>
+  <Style Browser="Firefox">~/Styles/Firefox.css</Style> 
+</Styles>

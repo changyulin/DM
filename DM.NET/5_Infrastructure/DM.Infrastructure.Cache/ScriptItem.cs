@@ -17,25 +17,24 @@ namespace DM.Infrastructure.Cache
         /// Get js src list from cache
         /// </summary>
         /// <param name="refID">file name</param>
-        /// <returns>js src list</returns>
+        /// <returns>js url list</returns>
         public static IEnumerable<XElement> GetJSList(string refID)
         {
             XElement scriptItem = ScriptItem.Get(refID).Value;
             List<XElement> jsList = new List<XElement>();
-            if (scriptItem == null)
+            if (scriptItem != null)
             {
-                return jsList;
-            }
-            IEnumerable<XElement> scriptItems = scriptItem.Elements();
-            foreach (XElement item in scriptItems)
-            {
-                if (item.Name.LocalName == "Script" && Valid(item))
+                IEnumerable<XElement> scriptItems = scriptItem.Elements();
+                foreach (XElement item in scriptItems)
                 {
-                    jsList.Add(item);
-                }
-                else if(item.Name.LocalName == "Include")
-                {
-                    ScriptItem.Get(item.Attribute("ID").Value);
+                    if (item.Name.LocalName == "Script" && Valid(item))
+                    {
+                        jsList.Add(item);
+                    }
+                    else if (item.Name.LocalName == "Include")
+                    {
+                        ScriptItem.Get(item.Attribute("ID").Value);
+                    }
                 }
             }
             return jsList;
