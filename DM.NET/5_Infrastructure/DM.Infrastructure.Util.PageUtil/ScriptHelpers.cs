@@ -42,7 +42,7 @@ namespace DM.Infrastructure.Util.PageUtil
                     // cache the scripts if not cached already
                     PageHelpers.Cache(ScriptCacheFactory.GetCacheManager(), scriptList);
                     string url = string.Format("{0}?hash={1}",
-                        page.ResolveClientUrl("~/scriptoptimizer.ashx"),
+                        page.ResolveClientUrl("~/ScriptOptimizer.ashx"),
                         HttpUtility.UrlEncode(PageHelpers.GetHash(scriptList)));
                     AddScriptToPage(page, url);
                     //or use: page.ClientScript.RegisterClientScriptInclude("baseall", url);
@@ -60,8 +60,8 @@ namespace DM.Infrastructure.Util.PageUtil
         private static void AddScriptToPage(Page page, string scriptUrl)
         {
             HtmlGenericControl scriptHtml = new HtmlGenericControl("script");
-            scriptHtml.Attributes.Add("type", "text/javascript");
             scriptHtml.Attributes.Add("src", scriptUrl);
+            scriptHtml.Attributes.Add("type", "text/javascript");
             page.Header.Controls.Add(scriptHtml);
         }
     }

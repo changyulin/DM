@@ -61,8 +61,8 @@ namespace DM.Infrastructure.Util.PageUtil
         {
             HtmlLink css = new HtmlLink();
             css.Href = styleUrl;
-            css.Attributes.Add("type", "text/css");
             css.Attributes.Add("rel", "stylesheet");
+            css.Attributes.Add("type", "text/css");
             page.Header.Controls.Add(css);
         }
     }
