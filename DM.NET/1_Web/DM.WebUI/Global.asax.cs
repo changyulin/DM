@@ -73,7 +73,7 @@ namespace DM.WebUI
             Exception ex = Server.GetLastError();
             LogHelper.Error("Global Error", ex.InnerException != null ? ex.InnerException : ex);
             Context.ClearError();
-            //Response.Redirect("~/Error.aspx");
+            Response.Redirect("~/ErrorPage/Error.htm");
         }
 
         void Session_Start(object sender, EventArgs e)

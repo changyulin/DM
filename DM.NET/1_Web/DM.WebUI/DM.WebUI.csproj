@@ -90,14 +90,17 @@
     <Content Include="App_Data\Config\Lang\zh\CN\UI.xml" />
     <Content Include="App_Data\Config\Script\Script.xml" />
     <Content Include="App_Data\Config\Style\Style.xml" />
-    <Content Include="Error.aspx" />
+    <Content Include="ErrorPage\Error.htm" />
+    <Content Include="ErrorPage\FileNotFound.htm" />
+    <Content Include="ErrorPage\NoAccess.htm" />
     <Content Include="Scripts\jsTest.js" />
+    <Content Include="Scripts\Util\CrossDomain.js" />
+    <Content Include="Scripts\Util\Namespace.js" />
+    <Content Include="Scripts\Util\window.js" />
+    <Content Include="Scripts\Util\xml.js" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\IE8.css" />
     <Content Include="Styles\Firefox.css" />
     <Content Include="Web.config">
@@ -120,13 +123,6 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Error.aspx.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Error.aspx.designer.cs">
-      <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,6 +231,7 @@
   <ItemGroup>
     <Content Include="HttpHander\HttpHanderCommon\StyleOptimizer.ashx" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

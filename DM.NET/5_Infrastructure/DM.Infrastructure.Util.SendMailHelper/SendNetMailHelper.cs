@@ -17,7 +17,7 @@ namespace DM.Infrastructure.Util.SendMailHelper
             string mailServer = "";
             //string mailServer = GetConfigData.GetConfigValue("MailServer");
 
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+            SmtpClient smtp = new SmtpClient();
             MailAddress From = new MailAddress(entity.FromMail, entity.SendName);
             MailMessage message = new MailMessage();
 

@@ -6,6 +6,7 @@ using DM.IRepository;
 using DM.Infrastructure.Repository;
 using DM.DomainModel;
 using DM.Infrastructure.UnitOfWork;
+using DM.Infrastructure.Domain;
 
 namespace DM.Repository
 {
@@ -14,19 +15,19 @@ namespace DM.Repository
         public ProductRepository() { }
         public ProductRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
-        public override void PersistCreationOf(Infrastructure.Domain.EntityBase entity)
+        public override void PersistCreationOf(EntityBase entity)
         {
             //ADO.NET code or Linq code
             throw new NotImplementedException();
         }
 
-        public override void PersistUpdateOf(Infrastructure.Domain.EntityBase entity)
+        public override void PersistUpdateOf(EntityBase entity)
         {
             //ADO.NET code or Linq code
             throw new NotImplementedException();
         }
 
-        public override void PersistDeletionOf(Infrastructure.Domain.EntityBase entity)
+        public override void PersistDeletionOf(EntityBase entity)
         {
             //ADO.NET code or Linq code
             throw new NotImplementedException();
