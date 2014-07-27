@@ -4,68 +4,67 @@ using System.Configuration;
 using System.Globalization;
 using Microsoft.Practices.EnterpriseLibrary.Caching;
 using Microsoft.Practices.EnterpriseLibrary.Caching.Expirations;
+using StructureMap;
 
 namespace DM.Infrastructure.Cache
 {
     public interface ICacheFactory
     {
-        CacheManager GetCacheManager();
-        ICacheItemExpiration[] CreateCacheItemExpiration();
+        ICache GetCacheManager();
     }
 
-    public abstract class BaseCacheFactory
+    public class ConfigCacheFactory :  ICacheFactory
     {
-        public abstract string CacheName { get; }
-
-        public virtual CacheManager GetCacheManager() { return CacheFactory.GetCacheManager(CacheName) as CacheManager; }
-
-        public ICacheItemExpiration[] CreateCacheItemExpiration()
+        public ICache GetCacheManager()
         {
-            List<ICacheItemExpiration> cacheItemExpiration = new List<ICacheItemExpiration>();
-
-            string slidingSpanName = string.Format(CultureInfo.InvariantCulture, "{0}CacheSlidingExpirationTimeSpan", CacheName);
-            string slidingSpan = ConfigurationManager.AppSettings[slidingSpanName];
-            if (!string.IsNullOrEmpty(slidingSpan))
-            {
-                TimeSpan slidingExpirationTimeSpan = TimeSpan.Parse(slidingSpan, CultureInfo.InvariantCulture);
-                cacheItemExpiration.Add(new SlidingTime(slidingExpirationTimeSpan));
-            }
-
-            string absoluteSpanName = string.Format(CultureInfo.InvariantCulture, "{0}CacheAbsoluteExpirationTimeSpan", CacheName);
-            string absoluteSpan = ConfigurationManager.AppSettings[absoluteSpanName];
-            if (!string.IsNullOrEmpty(absoluteSpan))
-            {
-                TimeSpan absoluteExpirationTimeSpan = TimeSpan.Parse(absoluteSpan, CultureInfo.InvariantCulture);
-                cacheItemExpiration.Add(new AbsoluteTime(absoluteExpirationTimeSpan));
-            }
-
-            return cacheItemExpiration.ToArray();
+            return ObjectFactory.GetNamedInstance<ICache>("Config");
         }
     }
 
-    public class ConfigCacheFactory : BaseCacheFactory, ICacheFactory
+    public class LangCacheFactory :  ICacheFactory
     {
-        public override string CacheName { get { return "Config"; } }
-    }
-
-    public class LangCacheFactory : BaseCacheFactory, ICacheFactory
-    {
-        public override string CacheName { get { return "Lang"; } }
-    }
-
-    public class ScriptCacheFactory
-    {
-        public static CacheManager GetCacheManager()
+        public ICache GetCacheManager()
         {
-            return CacheFactory.GetCacheManager("Script") as CacheManager;
+            return ObjectFactory.GetNamedInstance<ICache>("Lang");
         }
     }
 
-    public class StyleCacheFactory
+    public class ScriptCacheFactory : ICacheFactory
     {
-        public static CacheManager GetCacheManager()
+        public ICache GetCacheManager()
         {
-            return CacheFactory.GetCacheManager("Style") as CacheManager;
+            return ObjectFactory.GetNamedInstance<ICache>("Script");
+        }
+    }
+
+    public class StyleCacheFactory : ICacheFactory
+    {
+        public ICache GetCacheManager()
+        {
+            return ObjectFactory.GetNamedInstance<ICache>("Style");
+        }
+    }
+
+    public class CacheFactory
+    {
+        public static ICache CreateConfigCache()
+        {
+            return ObjectFactory.GetNamedInstance<ICache>("Config");
+        }
+
+        public static ICache CreateLangCache()
+        {
+            return ObjectFactory.GetNamedInstance<ICache>("Lang");
+        }
+
+        public static ICache CreateScriptCache()
+        {
+            return ObjectFactory.GetNamedInstance<ICache>("Script");
+        }
+
+        public static ICache CreateStyleCache()
+        {
+            return ObjectFactory.GetNamedInstance<ICache>("Style");
         }
     }
 }

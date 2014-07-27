@@ -22,12 +22,7 @@ namespace DM.Infrastructure.Cache
         }
 
         protected abstract T GetFromSource();
-
-        //override this method to do any additional initialization before object is cached.
-        virtual protected void Initialize() { return; }
-        virtual protected bool ShouldCache() { return true; }
-        virtual public bool IsExpired() { return false; }
-        virtual public void Remove() { return; }
+        public abstract void Remove();
     }
 
     public abstract class CacheValueRefID<V, T, CF> : CacheValue<V>
@@ -39,7 +34,7 @@ namespace DM.Infrastructure.Cache
         public override void Remove()
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(this.RefID);
             cache.Remove(keyName);
         }
@@ -47,16 +42,13 @@ namespace DM.Infrastructure.Cache
         public static T GetCached(string refID)
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(refID);
-            CacheValueRefID<V, T, CF> item = (CacheValueRefID<V, T, CF>)cache.GetData(keyName);
+            CacheValueRefID<V, T, CF> item = cache.Get<CacheValueRefID<V, T, CF>>(keyName);
             if (item != null)
             {
-                if (item.IsExpired())
-                {
-                    item.Remove();
-                    item = null;
-                }
+                item.Remove();
+                item = null;
             }
             return (T)item;
         }
@@ -64,16 +56,13 @@ namespace DM.Infrastructure.Cache
         public static T Get(string refID)
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(refID);
-            CacheValueRefID<V, T, CF> item = (CacheValueRefID<V, T, CF>)cache.GetData(keyName);
+            CacheValueRefID<V, T, CF> item = cache.Get<CacheValueRefID<V, T, CF>>(keyName);
             if (item != null)
             {
-                if (item.IsExpired())
-                {
-                    item.Remove();
-                    item = null;
-                }
+                item.Remove();
+                item = null;
             }
 
             if (item == null)
@@ -81,10 +70,9 @@ namespace DM.Infrastructure.Cache
                 item = new T();
                 item.RefID = refID;
                 item.SetValue(item.GetFromSource());
-                item.Initialize();
-                if (!item.IsDefaultData() && item.ShouldCache())
+                if (!item.IsDefaultData())
                 {
-                    cache.Add(keyName, item, item.GetCachePriority, null, cf.CreateCacheItemExpiration());
+                    cache.Add(keyName, item);
                 }
             }
             return (T)item;
@@ -93,15 +81,14 @@ namespace DM.Infrastructure.Cache
         public static T Add(string refID, V value)
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(refID);
             CacheValueRefID<V, T, CF> item = new T();
             item.RefID = refID;
             item.SetValue(value);
-            item.Initialize();
-            if (!item.IsDefaultData() && item.ShouldCache())
+            if (!item.IsDefaultData())
             {
-                cache.Add(keyName, item, item.GetCachePriority, null, cf.CreateCacheItemExpiration());
+                cache.Add(keyName, item);
             }
             return (T)item;
         }
@@ -154,7 +141,7 @@ namespace DM.Infrastructure.Cache
         public override void Remove()
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(this.RefID);
             cache.Remove(keyName);
         }
@@ -162,16 +149,13 @@ namespace DM.Infrastructure.Cache
         public static T GetCached(string refID)
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(refID);
-            CacheConfigRefID<T, CF> item = (CacheConfigRefID<T, CF>)cache.GetData(keyName);
+            CacheConfigRefID<T, CF> item = cache.Get<CacheConfigRefID<T, CF>>(keyName);
             if (item != null)
             {
-                if (item.IsExpired())
-                {
-                    item.Remove();
-                    item = null;
-                }
+                item.Remove();
+                item = null;
             }
             return (T)item;
         }
@@ -179,16 +163,13 @@ namespace DM.Infrastructure.Cache
         public static T Get(string refID)
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(refID);
-            CacheConfigRefID<T, CF> item = (CacheConfigRefID<T, CF>)cache.GetData(keyName);
+            CacheConfigRefID<T, CF> item = cache.Get<CacheConfigRefID<T, CF>>(keyName);
             if (item != null)
             {
-                if (item.IsExpired())
-                {
-                    item.Remove();
-                    item = null;
-                }
+                item.Remove();
+                item = null;
             }
 
             if (item == null)
@@ -196,10 +177,9 @@ namespace DM.Infrastructure.Cache
                 item = new T();
                 item.RefID = refID;
                 item.SetValue(item.GetFromSource());
-                item.Initialize();
-                if (!item.IsDefaultData() && item.ShouldCache())
+                if (!item.IsDefaultData())
                 {
-                    cache.Add(keyName, item, item.GetCachePriority, null, cf.CreateCacheItemExpiration());
+                    cache.Add(keyName, item);
                 }
             }
             return (T)item;
@@ -208,15 +188,14 @@ namespace DM.Infrastructure.Cache
         public static T Add(string refID, XElement value)
         {
             ICacheFactory cf = new CF();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(refID);
             CacheConfigRefID<T, CF> item = new T();
             item.RefID = refID;
             item.SetValue(value);
-            item.Initialize();
-            if (!item.IsDefaultData() && item.ShouldCache())
+            if (!item.IsDefaultData())
             {
-                cache.Add(keyName, item, item.GetCachePriority, null, cf.CreateCacheItemExpiration());
+                cache.Add(keyName, item);
             }
             return (T)item;
         }
@@ -228,6 +207,6 @@ namespace DM.Infrastructure.Cache
 
     }
 
-    
+
 
 }

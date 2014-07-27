@@ -53,7 +53,7 @@ namespace DM.Infrastructure.Util.PageUtil
         /// </summary>
         /// <param name="cache">cache manager</param>
         /// <param name="urlList">url list</param>
-        public static void Cache(ICacheManager cache, List<string> urlList)
+        public static void Cache(ICache cache, List<string> urlList)
         {
             string keyName = GetCacheKey(GetHash(urlList));
             if (!cache.Contains(keyName))

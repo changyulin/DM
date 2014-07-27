@@ -40,7 +40,7 @@ namespace DM.Infrastructure.Util.PageUtil
                 if (optimizeStyle)
                 {
                     // cache the style if not cached already
-                    PageHelpers.Cache(StyleCacheFactory.GetCacheManager(), styleList);
+                    PageHelpers.Cache(CacheFactory.CreateStyleCache(), styleList);
                     string url = string.Format("{0}?hash={1}",
                         page.ResolveClientUrl("~/StyleOptimizer.ashx"),
                         HttpUtility.UrlEncode(PageHelpers.GetHash(styleList)));

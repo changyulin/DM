@@ -40,7 +40,7 @@ namespace DM.Infrastructure.Util.PageUtil
                 if (optimizeJS)
                 {
                     // cache the scripts if not cached already
-                    PageHelpers.Cache(ScriptCacheFactory.GetCacheManager(), scriptList);
+                    PageHelpers.Cache(CacheFactory.CreateScriptCache(), scriptList);
                     string url = string.Format("{0}?hash={1}",
                         page.ResolveClientUrl("~/ScriptOptimizer.ashx"),
                         HttpUtility.UrlEncode(PageHelpers.GetHash(scriptList)));
