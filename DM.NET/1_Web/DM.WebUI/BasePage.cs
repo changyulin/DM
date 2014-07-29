@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 using DM.Infrastructure.Util.PageUtil;
+using StackExchange.Profiling;
 
 namespace DM.WebUI
 {
@@ -18,8 +19,11 @@ namespace DM.WebUI
 
         protected virtual void PageLoadComplete()
         {
-            StyleHelpers.AddStyle(this.Page, "Style");
-            ScriptHelpers.AddScript(this.Page, "Script");
+            using (MiniProfiler.Current.Step("AddStyle and AddScript"))
+            {
+                StyleHelpers.AddStyle(this.Page, "Style");
+                ScriptHelpers.AddScript(this.Page, "Script");
+            }
 
             ExcutePrePageLoadCompleteJs();
 

@@ -39,16 +39,13 @@ namespace DM.Infrastructure.Cache
         public static LangItem Get(string language, string area, string refID)
         {
             ICacheFactory cf = new LangCacheFactory();
-            CacheManager cache = cf.GetCacheManager();
+            ICache cache = cf.GetCacheManager();
             string keyName = MakeKeyName(language, area, refID);
-            LangItem item = (LangItem)cache.GetData(keyName);
+            LangItem item = cache.Get<LangItem>(keyName);
             if (item != null)
             {
-                if (item.IsExpired())
-                {
-                    item.Remove();
-                    item = null;
-                }
+                item.Remove();
+                item = null;
             }
 
             if (item == null)
@@ -58,8 +55,7 @@ namespace DM.Infrastructure.Cache
                 item.Area = area;
                 item.RefID = refID;
                 item.SetValue(item.GetFromSource());
-                item.Initialize();
-                if (!item.IsDefaultData() && item.ShouldCache())
+                if (!item.IsDefaultData())
                 {
                     cache.Add(keyName, item);
                 }

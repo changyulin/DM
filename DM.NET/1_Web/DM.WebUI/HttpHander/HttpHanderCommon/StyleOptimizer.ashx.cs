@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using DM.Infrastructure.Cache;
 using DM.Infrastructure.Util.PageUtil;
-using Microsoft.Practices.EnterpriseLibrary.Caching;
 
 namespace DM.WebUI.HttpHander.HttpHanderCommon
 {
@@ -22,9 +21,9 @@ namespace DM.WebUI.HttpHander.HttpHanderCommon
             string hash = request["hash"];
             if (!string.IsNullOrEmpty(hash))
             {
-                ICacheManager cache = StyleCacheFactory.GetCacheManager();
+                ICache cache = CacheFactory.CreateStyleCache();
                 string keyName = PageHelpers.GetCacheKey(hash);
-                byte[] responseBytes = cache[keyName] as byte[];
+                byte[] responseBytes = cache.Get<byte[]>(keyName);
                 if (responseBytes != null)
                 {
                     HttpResponse response = context.Response;
