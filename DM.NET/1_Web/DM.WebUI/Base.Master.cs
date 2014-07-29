@@ -22,8 +22,14 @@ namespace DM.WebUI
 
         protected void Page_PreRender(object sender, EventArgs o)
         {
-            StyleHelpers.LoadStyle(this.Page);
-            ScriptHelpers.LoadScript(this.Page);
+            using (MiniProfiler.Current.Step("LoadStyle"))
+            {
+                StyleHelpers.LoadStyle(this.Page);
+            }
+            using (MiniProfiler.Current.Step("LoadScript"))
+            {
+                ScriptHelpers.LoadScript(this.Page);
+            }
         }
     }
 }

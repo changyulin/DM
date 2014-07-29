@@ -226,12 +226,17 @@
     <Content Include="Config\RouteRule.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\cachingConfiguration.config" />
+    <Content Include="Config\caching.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="HttpHander\HttpHanderCommon\StyleOptimizer.ashx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\Jquery\jquery-1.10.2.min.js" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
