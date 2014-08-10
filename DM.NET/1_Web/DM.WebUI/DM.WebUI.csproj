@@ -178,6 +178,10 @@
       <Project>{9244c7b0-fe29-4595-8fc4-adc99cbc98c5}</Project>
       <Name>DM.Infrastructure.Route</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.CryptologyHelpers\DM.Infrastructure.Util.CryptologyHelpers.csproj">
+      <Project>{7053d2bf-c2fb-4a19-bb6b-8274962f775b}</Project>
+      <Name>DM.Infrastructure.Util.CryptologyHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\5_Infrastructure\DM.Infrastructure.Util.FeatureHelpers\DM.Infrastructure.Util.FeatureHelpers.csproj">
       <Project>{cd84eb2f-e749-4a29-b772-30315cd8dd50}</Project>
       <Name>DM.Infrastructure.Util.FeatureHelpers</Name>
@@ -236,6 +240,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\Jquery\jquery-1.10.2.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\Cryptography.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

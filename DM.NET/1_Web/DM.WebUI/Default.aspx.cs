@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using DM.Infrastructure.Cache;
 using DM.Infrastructure.Log;
+using DM.Infrastructure.Util.CryptologyHelpers;
 using DM.Infrastructure.Util.LangHelpers;
 using DM.IService;
 using DM.ViewModel;
@@ -23,7 +24,7 @@ namespace DM.WebUI
         {
             XElement configTest = ConfigListItem.Get("ConfigTest").Value;
             string home = LangHelpers.GetString("homeLabel", "UI");
-            
+
             using (MiniProfiler.Current.Step("Page_Load()"))
             {
                 ProductViewModel product = productService.GetProduct("1");
