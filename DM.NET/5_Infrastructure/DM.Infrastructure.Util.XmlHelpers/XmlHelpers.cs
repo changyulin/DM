@@ -825,37 +825,6 @@ namespace DM.Infrastructure.Util.XmlHelpers
         }
 
         /// <summary>
-        /// Convert a string to base64.
-        /// </summary>
-        /// <param name="data">String to be converted to base64</param>
-        /// <returns>Base64 encoded value</returns>
-        static public string ToBase64(string data)
-        {
-            return Convert.ToBase64String(new UnicodeEncoding().GetBytes(data));
-        }
-
-        /// <summary>
-        /// Convert a string from base64.
-        /// </summary>
-        /// <param name="data">Base64 encoded data</param>
-        /// <returns>String converted form base64</returns>
-        static public string FromBase64(string data)
-        {
-            byte[] arr = Convert.FromBase64String(data);
-            return new UnicodeEncoding().GetString(arr);
-        }
-
-        /// <summary>
-        /// Convert a base64 string to a byte array.
-        /// </summary>
-        /// <param name="data">Base64 string</param>
-        /// <returns>Binary data</returns>
-        static public byte[] FromBase64ToBytes(string data)
-        {
-            return Convert.FromBase64String(data);
-        }
-
-        /// <summary>
         /// Serialize an object into an XDocument
         /// </summary>
         /// <param name="pObject">Object to serialize</param>
