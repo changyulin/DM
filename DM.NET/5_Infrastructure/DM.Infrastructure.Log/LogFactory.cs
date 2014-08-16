@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using StructureMap;
 
 namespace DM.Infrastructure.Log
 {
@@ -9,8 +6,7 @@ namespace DM.Infrastructure.Log
     {
         public static ILogger GetLogger()
         {
-            ILogger log = new DefaultLogger();
-            return log;
+            return ObjectFactory.GetNamedInstance<ILogger>("Default");
         }
     }
 }

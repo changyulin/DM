@@ -72,6 +72,7 @@ namespace DM.WebUI
             // 在出现未处理的错误时运行的代码
             Exception ex = Server.GetLastError();
             LogHelper.Error("Global Error", ex.InnerException != null ? ex.InnerException : ex);
+            //LogHelper.HandleException(ex);//暂时不使用HandleException, 因为Logging已经够用了
             Context.ClearError();
             Response.Redirect("~/ErrorPage/Error.htm");
         }
