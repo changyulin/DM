@@ -1,29 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
+using Microsoft.Practices.EnterpriseLibrary.ExceptionHandling;
 
 namespace DM.Infrastructure.Log
 {
     public class LogHelper
     {
-        public static readonly log4net.ILog logDebug = log4net.LogManager.GetLogger("logDebug");
-        public static readonly log4net.ILog logError = log4net.LogManager.GetLogger("logError");
+        public static readonly ILogger logger = LogFactory.GetLogger();
+
+        public static void Info(string message)
+        {
+            logger.Info(message);
+        }
 
         public static void Debug(string message)
         {
-            if (logDebug.IsDebugEnabled)
-            {
-                logDebug.Debug(message);
-            }
+            logger.Debug(message);
         }
 
         public static void Error(string message, Exception ex)
         {
-            if (logError.IsErrorEnabled)
+            logger.Error(message, ex);
+        }
+
+        public static void HandleException(Exception ex, string policy = "Policy")
+        {
+            Boolean rethrow = false;
+            var exManager = EnterpriseLibraryContainer.Current.GetInstance<ExceptionManager>();
+            try
             {
-                logError.Error(message, ex);
+                rethrow = exManager.HandleException(ex, policy);
+            }
+            catch (Exception)
+            {
+                throw ex;
             }
         }
+
     }
 }

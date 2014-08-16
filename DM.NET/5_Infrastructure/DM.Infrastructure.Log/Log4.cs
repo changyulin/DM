@@ -1,20 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using log4net;
 
 namespace DM.Infrastructure.Log
 {
-    public class DefaultLogger : ILogger
+    public class Log4 : ILogger
     {
+        public readonly ILog logInfo;
         public readonly ILog logDebug;
         public readonly ILog logError;
 
-        public DefaultLogger()
+        public Log4()
         {
+            logInfo = LogManager.GetLogger("logInfo");
             logDebug = LogManager.GetLogger("logDebug");
             logError = LogManager.GetLogger("logError");
+        }
+
+        public void Info(string message)
+        {
+            if (logInfo.IsInfoEnabled)
+            {
+                logInfo.Info(message);
+            }
         }
 
         public void Debug(string message)
